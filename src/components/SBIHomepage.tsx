@@ -1,5 +1,14 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { 
   Home, 
   CreditCard, 
@@ -10,7 +19,12 @@ import {
   XCircle,
   Globe,
   ChevronDown,
-  Menu
+  Menu,
+  MessageCircle,
+  Mail,
+  FileText,
+  MapPin,
+  Clock
 } from "lucide-react";
 import sbiLogo from "@/assets/sbi-logo.png";
 import heroBanking from "@/assets/hero-banking.png";
@@ -73,17 +87,66 @@ export const SBIHomepage = ({ onLoginClick }: SBIHomepageProps) => {
               Products & Services
             </a>
             <a href="#" className="flex items-center space-x-2 whitespace-nowrap hover:text-primary-light transition-colors">
-              <HelpCircle className="h-4 w-4" />
-              <span>How Do I (Help)</span>
-            </a>
-            <a href="#" className="flex items-center space-x-2 whitespace-nowrap hover:text-primary-light transition-colors">
               <CreditCard className="h-4 w-4" />
               <span>Manage Debit Card E-Mandate</span>
             </a>
-            <a href="#" className="flex items-center space-x-2 whitespace-nowrap hover:text-primary-light transition-colors">
-              <Phone className="h-4 w-4" />
-              <span>Contact Us</span>
-            </a>
+            
+            {/* Help & Contact Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="flex items-center space-x-2 text-primary-foreground hover:text-primary-light hover:bg-primary-dark/20 h-auto p-2">
+                  <HelpCircle className="h-4 w-4" />
+                  <span>Help & Support</span>
+                  <ChevronDown className="h-3 w-3" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 bg-card border-border">
+                <DropdownMenuLabel className="text-foreground">How can we help you?</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                
+                <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-accent">
+                  <FileText className="h-4 w-4" />
+                  <span>How Do I (Help)</span>
+                </DropdownMenuItem>
+                
+                <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-accent">
+                  <MessageCircle className="h-4 w-4" />
+                  <span>Live Chat Support</span>
+                </DropdownMenuItem>
+                
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel className="text-foreground">Contact Us</DropdownMenuLabel>
+                
+                <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-accent">
+                  <Phone className="h-4 w-4" />
+                  <div>
+                    <p className="font-medium">Customer Care</p>
+                    <p className="text-xs text-muted-foreground">1800-425-3800</p>
+                  </div>
+                </DropdownMenuItem>
+                
+                <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-accent">
+                  <Mail className="h-4 w-4" />
+                  <div>
+                    <p className="font-medium">Email Support</p>
+                    <p className="text-xs text-muted-foreground">support@sbi.co.in</p>
+                  </div>
+                </DropdownMenuItem>
+                
+                <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-accent">
+                  <MapPin className="h-4 w-4" />
+                  <span>Find Branch/ATM</span>
+                </DropdownMenuItem>
+                
+                <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-accent">
+                  <Clock className="h-4 w-4" />
+                  <div>
+                    <p className="font-medium">Service Hours</p>
+                    <p className="text-xs text-muted-foreground">24/7 Online Support</p>
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </nav>
