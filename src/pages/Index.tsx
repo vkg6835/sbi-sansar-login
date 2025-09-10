@@ -1,11 +1,95 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { LoginWelcome } from "@/components/LoginWelcome";
+import { LoginUsername } from "@/components/LoginUsername";
+import { LoginPassword } from "@/components/LoginPassword";
+import { LoginSuccess } from "@/components/LoginSuccess";
+
+type LoginStep = 'welcome' | 'username' | 'password' | 'success' | 'dashboard';
+type Language = 'en' | 'hi';
 
 const Index = () => {
+  const [currentStep, setCurrentStep] = useState<LoginStep>('welcome');
+  const [language, setLanguage] = useState<Language>('en');
+  const [username, setUsername] = useState('');
+
+  const handleLanguageSelect = (lang: Language) => {
+    setLanguage(lang);
+  };
+
+  const handleUsernameSubmit = (user: string) => {
+    setUsername(user);
+    setCurrentStep('password');
+  };
+
+  const handlePasswordSubmit = () => {
+    setCurrentStep('success');
+  };
+
+  const handleProceedToDashboard = () => {
+    setCurrentStep('dashboard');
+  };
+
+  if (currentStep === 'welcome') {
+    return (
+      <LoginWelcome 
+        onLanguageSelect={handleLanguageSelect}
+        onProceed={() => setCurrentStep('username')}
+      />
+    );
+  }
+
+  if (currentStep === 'username') {
+    return (
+      <LoginUsername 
+        onBack={() => setCurrentStep('welcome')}
+        onNext={handleUsernameSubmit}
+        language={language}
+      />
+    );
+  }
+
+  if (currentStep === 'password') {
+    return (
+      <LoginPassword 
+        onBack={() => setCurrentStep('username')}
+        onNext={handlePasswordSubmit}
+        username={username}
+        language={language}
+      />
+    );
+  }
+
+  if (currentStep === 'success') {
+    return (
+      <LoginSuccess 
+        username={username}
+        language={language}
+        onProceedToDashboard={handleProceedToDashboard}
+      />
+    );
+  }
+
+  // Dashboard placeholder
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+      <div className="text-center space-y-4">
+        <h1 className="text-3xl font-bold text-foreground">
+          {language === 'en' ? 'Welcome to your Dashboard!' : 'आपके डैशबोर्ड में स्वागत है!'}
+        </h1>
+        <p className="text-muted-foreground">
+          {language === 'en' 
+            ? `Hello ${username}, you have successfully logged into OnlineSBI.` 
+            : `नमस्ते ${username}, आप सफलतापूर्वक OnlineSBI में लॉग इन हो गए हैं।`}
+        </p>
+        <button 
+          onClick={() => {
+            setCurrentStep('welcome');
+            setUsername('');
+          }}
+          className="text-primary hover:text-primary-dark underline"
+        >
+          {language === 'en' ? 'Back to Login' : 'लॉगिन पर वापस जाएं'}
+        </button>
       </div>
     </div>
   );
