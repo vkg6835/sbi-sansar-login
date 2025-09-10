@@ -1,14 +1,15 @@
 import { useState } from "react";
+import { SBIHomepage } from "@/components/SBIHomepage";
 import { LoginWelcome } from "@/components/LoginWelcome";
 import { LoginUsername } from "@/components/LoginUsername";
 import { LoginPassword } from "@/components/LoginPassword";
 import { LoginSuccess } from "@/components/LoginSuccess";
 
-type LoginStep = 'welcome' | 'username' | 'password' | 'success' | 'dashboard';
+type LoginStep = 'homepage' | 'welcome' | 'username' | 'password' | 'success' | 'dashboard';
 type Language = 'en' | 'hi';
 
 const Index = () => {
-  const [currentStep, setCurrentStep] = useState<LoginStep>('welcome');
+  const [currentStep, setCurrentStep] = useState<LoginStep>('homepage');
   const [language, setLanguage] = useState<Language>('en');
   const [username, setUsername] = useState('');
 
@@ -28,6 +29,14 @@ const Index = () => {
   const handleProceedToDashboard = () => {
     setCurrentStep('dashboard');
   };
+
+  if (currentStep === 'homepage') {
+    return (
+      <SBIHomepage 
+        onLoginClick={() => setCurrentStep('welcome')}
+      />
+    );
+  }
 
   if (currentStep === 'welcome') {
     return (
@@ -83,12 +92,12 @@ const Index = () => {
         </p>
         <button 
           onClick={() => {
-            setCurrentStep('welcome');
+            setCurrentStep('homepage');
             setUsername('');
           }}
           className="text-primary hover:text-primary-dark underline"
         >
-          {language === 'en' ? 'Back to Login' : 'लॉगिन पर वापस जाएं'}
+          {language === 'en' ? 'Back to Homepage' : 'मुखपृष्ठ पर वापस जाएं'}
         </button>
       </div>
     </div>
