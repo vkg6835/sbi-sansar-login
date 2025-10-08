@@ -9,7 +9,7 @@ import sbiLogo from "@/assets/sbi-logo.png";
 interface LoginUsernameProps {
   onBack: () => void;
   onNext: (username: string) => void;
-  language: 'en' | 'hi';
+  language: 'en' | 'hi' | 'gu';
 }
 
 export const LoginUsername = ({ onBack, onNext, language }: LoginUsernameProps) => {
@@ -38,6 +38,17 @@ export const LoginUsername = ({ onBack, onNext, language }: LoginUsernameProps) 
       errorEmpty: "कृपया अपना यूज़रनेम दर्ज करें",
       errorInvalid: "यूज़रनेम 8-30 अक्षरों का होना चाहिए",
       helpText: "आपका यूज़रनेम वह ID है जो आपने रजिस्ट्रेशन के दौरान बनाई थी"
+    },
+    gu: {
+      title: "તમારું યુઝરનેમ દાખલ કરો",
+      subtitle: "પગલું 1 નું 3",
+      label: "SBI ઇન્ટરનેટ બેંકિંગ યુઝરનેમ",
+      placeholder: "તમારું યુઝરનેમ દાખલ કરો",
+      button: "ચાલુ રાખો",
+      help: "યુઝરનેમ ભૂલી ગયા?",
+      errorEmpty: "કૃપા કરીને તમારું યુઝરનેમ દાખલ કરો",
+      errorInvalid: "યુઝરનેમ 8-30 અક્ષરોનું હોવું જોઈએ",
+      helpText: "તમારું યુઝરનેમ એ ID છે જે તમે નોંધણી દરમિયાન બનાવ્યું હતું"
     }
   };
 

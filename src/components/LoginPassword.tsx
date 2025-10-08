@@ -11,7 +11,7 @@ interface LoginPasswordProps {
   onBack: () => void;
   onNext: () => void;
   username: string;
-  language: 'en' | 'hi';
+  language: 'en' | 'hi' | 'gu';
 }
 
 export const LoginPassword = ({ onBack, onNext, username, language }: LoginPasswordProps) => {
@@ -52,6 +52,22 @@ export const LoginPassword = ({ onBack, onNext, username, language }: LoginPassw
       tips: "सुरक्षा सुझाव:",
       tip1: "अपनी लॉगिन जानकारी कभी साझा न करें",
       tip2: "बैंकिंग के बाद हमेशा लॉग आउट करें"
+    },
+    gu: {
+      title: "તમારો પાસવર્ડ દાખલ કરો",
+      subtitle: "પગલું 2 નું 3",
+      welcome: `પાછા સ્વાગત છે, ${username}`,
+      label: "પાસવર્ડ",
+      placeholder: "તમારો પાસવર્ડ દાખલ કરો",
+      button: "સાઇન ઇન કરો",
+      help: "પાસવર્ડ ભૂલી ગયા?",
+      virtualKeyboard: "વર્ચ્યુઅલ કીબોર્ડનો ઉપયોગ કરો",
+      errorEmpty: "કૃપા કરીને તમારો પાસવર્ડ દાખલ કરો",
+      errorWeak: "પાસવર્ડ ઓછામાં ઓછો 6 અક્ષરોનો હોવો જોઈએ",
+      securityNote: "તમારું કનેક્શન 256-બીટ એન્ક્રિપ્શન સાથે સુરક્ષિત છે",
+      tips: "સુરક્ષા ટીપ્સ:",
+      tip1: "તમારી લોગિન વિગતો ક્યારેય શેર કરશો નહીં",
+      tip2: "બેંકિંગ પછી હંમેશા લોગ આઉટ કરો"
     }
   };
 

@@ -6,7 +6,7 @@ import sbiLogo from "@/assets/sbi-logo.png";
 
 interface LoginSuccessProps {
   username: string;
-  language: 'en' | 'hi';
+  language: 'en' | 'hi' | 'gu';
   onProceedToDashboard: () => void;
 }
 
@@ -20,7 +20,8 @@ export const LoginSuccess = ({ username, language, onProceedToDashboard }: Login
       button: "Go to Dashboard",
       lastLogin: "Last login:",
       security: "Your session is secure",
-      sessionTime: "Session timeout: 20 minutes"
+      sessionTime: "Session timeout: 20 minutes",
+      redirecting: "Redirecting automatically in 3 seconds..."
     },
     hi: {
       title: "लॉगिन सफल!",
@@ -30,7 +31,19 @@ export const LoginSuccess = ({ username, language, onProceedToDashboard }: Login
       button: "डैशबोर्ड पर जाएं",
       lastLogin: "अंतिम लॉगिन:",
       security: "आपका सत्र सुरक्षित है",
-      sessionTime: "सत्र समाप्ति: 20 मिनट"
+      sessionTime: "सत्र समाप्ति: 20 मिनट",
+      redirecting: "3 सेकंड में स्वचालित रूप से रीडायरेक्ट हो रहा है..."
+    },
+    gu: {
+      title: "લોગિન સફળ!",
+      subtitle: "પગલું 3 નું 3",
+      welcome: `OnlineSBI માં સ્વાગત છે, ${username}`,
+      message: "તમે સફળતાપૂર્વક તમારા ખાતામાં લોગ ઇન થયા છો",
+      button: "ડેશબોર્ડ પર જાઓ",
+      lastLogin: "છેલ્લું લોગિન:",
+      security: "તમારું સત્ર સુરક્ષિત છે",
+      sessionTime: "સત્ર સમાપ્તિ: 20 મિનિટ",
+      redirecting: "3 સેકન્ડમાં આપોઆપ રીડાયરેક્ટ થઈ રહ્યું છે..."
     }
   };
 
@@ -116,7 +129,7 @@ export const LoginSuccess = ({ username, language, onProceedToDashboard }: Login
 
           {/* Auto redirect note */}
           <p className="text-xs text-center text-muted-foreground">
-            {language === 'en' ? 'Redirecting automatically in 3 seconds...' : '3 सेकंड में स्वचालित रूप से रीडायरेक्ट हो रहा है...'}
+            {t.redirecting}
           </p>
         </div>
       </Card>

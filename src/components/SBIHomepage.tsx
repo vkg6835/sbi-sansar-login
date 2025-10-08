@@ -31,13 +31,41 @@ import heroBanking from "@/assets/hero-banking.png";
 
 interface SBIHomepageProps {
   onLoginClick: () => void;
+  onLanguageChange?: (language: 'en' | 'hi' | 'gu') => void;
+  currentLanguage?: 'en' | 'hi' | 'gu';
 }
 
-export const SBIHomepage = ({ onLoginClick }: SBIHomepageProps) => {
+export const SBIHomepage = ({ onLoginClick, onLanguageChange, currentLanguage = 'en' }: SBIHomepageProps) => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const content = {
+    en: {
+      home: "Home",
+      products: "Products & Services",
+      debitCard: "Manage Debit Card E-Mandate",
+      help: "Help & Support",
+      language: "Language"
+    },
+    hi: {
+      home: "होम",
+      products: "उत्पाद और सेवाएं",
+      debitCard: "डेबिट कार्ड ई-मैंडेट प्रबंधित करें",
+      help: "सहायता और समर्थन",
+      language: "भाषा"
+    },
+    gu: {
+      home: "હોમ",
+      products: "ઉત્પાદનો અને સેવાઓ",
+      debitCard: "ડેબિટ કાર્ડ ઈ-મેન્ડેટ મેનેજ કરો",
+      help: "મદદ અને સપોર્ટ",
+      language: "ભાષા"
+    }
+  };
+
+  const t = content[currentLanguage];
 
   return (
     <div className="min-h-screen bg-background" id="home">
@@ -65,11 +93,46 @@ export const SBIHomepage = ({ onLoginClick }: SBIHomepageProps) => {
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                 Net Banking Branches
               </a>
-              <div className="flex items-center space-x-1 text-background bg-primary px-3 py-1 rounded cursor-pointer">
-                <Globe className="h-4 w-4" />
-                <span>Language</span>
-                <ChevronDown className="h-4 w-4" />
-              </div>
+              
+              {/* Language Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="flex items-center space-x-1 text-background bg-primary px-3 py-1 rounded cursor-pointer hover:bg-primary-dark transition-colors">
+                    <Globe className="h-4 w-4" />
+                    <span>{t.language}</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-40 bg-card border-border">
+                  <DropdownMenuItem 
+                    className="cursor-pointer hover:bg-accent"
+                    onClick={() => onLanguageChange?.('en')}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <span>English</span>
+                      {currentLanguage === 'en' && <CheckCircle className="h-4 w-4 text-success" />}
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    className="cursor-pointer hover:bg-accent"
+                    onClick={() => onLanguageChange?.('hi')}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <span>हिंदी</span>
+                      {currentLanguage === 'hi' && <CheckCircle className="h-4 w-4 text-success" />}
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    className="cursor-pointer hover:bg-accent"
+                    onClick={() => onLanguageChange?.('gu')}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <span>ગુજરાતી</span>
+                      {currentLanguage === 'gu' && <CheckCircle className="h-4 w-4 text-success" />}
+                    </div>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             {/* Mobile Menu */}
@@ -86,14 +149,14 @@ export const SBIHomepage = ({ onLoginClick }: SBIHomepageProps) => {
           <div className="flex items-center space-x-8 py-3 overflow-x-auto">
             <button onClick={() => scrollToSection('home')} className="flex items-center space-x-2 whitespace-nowrap hover:text-primary-light transition-colors">
               <Home className="h-4 w-4" />
-              <span>Home</span>
+              <span>{t.home}</span>
             </button>
             <button onClick={() => scrollToSection('products')} className="whitespace-nowrap hover:text-primary-light transition-colors">
-              Products & Services
+              {t.products}
             </button>
             <button onClick={() => scrollToSection('debit-card')} className="flex items-center space-x-2 whitespace-nowrap hover:text-primary-light transition-colors">
               <CreditCard className="h-4 w-4" />
-              <span>Manage Debit Card E-Mandate</span>
+              <span>{t.debitCard}</span>
             </button>
             
             {/* Help & Contact Dropdown */}
@@ -101,7 +164,7 @@ export const SBIHomepage = ({ onLoginClick }: SBIHomepageProps) => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex items-center space-x-2 text-primary-foreground hover:text-primary-light hover:bg-primary-dark/20 h-auto p-2">
                   <HelpCircle className="h-4 w-4" />
-                  <span>Help & Support</span>
+                  <span>{t.help}</span>
                   <ChevronDown className="h-3 w-3" />
                 </Button>
               </DropdownMenuTrigger>

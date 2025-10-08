@@ -4,7 +4,7 @@ import { Globe, Shield, HelpCircle, ArrowLeft } from "lucide-react";
 import sbiLogo from "@/assets/sbi-logo.png";
 
 interface LoginWelcomeProps {
-  onLanguageSelect: (language: 'en' | 'hi') => void;
+  onLanguageSelect: (language: 'en' | 'hi' | 'gu') => void;
   onProceed: () => void;
   onBack: () => void;
 }
@@ -45,7 +45,7 @@ export const LoginWelcome = ({ onLanguageSelect, onProceed, onBack }: LoginWelco
                 <span>Choose your preferred language</span>
               </div>
               
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 <Button 
                   variant="bankingSecondary" 
                   onClick={() => onLanguageSelect('en')}
@@ -59,6 +59,13 @@ export const LoginWelcome = ({ onLanguageSelect, onProceed, onBack }: LoginWelco
                   className="h-12"
                 >
                   हिंदी
+                </Button>
+                <Button 
+                  variant="bankingSecondary" 
+                  onClick={() => onLanguageSelect('gu')}
+                  className="h-12"
+                >
+                  ગુજરાતી
                 </Button>
               </div>
             </div>
