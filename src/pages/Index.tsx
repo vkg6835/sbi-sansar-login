@@ -43,6 +43,7 @@ const Index = () => {
       <LoginWelcome 
         onLanguageSelect={handleLanguageSelect}
         onProceed={() => setCurrentStep('username')}
+        onBack={() => setCurrentStep('homepage')}
       />
     );
   }
