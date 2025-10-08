@@ -34,8 +34,13 @@ interface SBIHomepageProps {
 }
 
 export const SBIHomepage = ({ onLoginClick }: SBIHomepageProps) => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" id="home">
       {/* Top Header */}
       <header className="bg-card border-b border-border">
         <div className="container mx-auto px-4 py-3">
@@ -79,17 +84,17 @@ export const SBIHomepage = ({ onLoginClick }: SBIHomepageProps) => {
       <nav className="bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="flex items-center space-x-8 py-3 overflow-x-auto">
-            <a href="#" className="flex items-center space-x-2 whitespace-nowrap hover:text-primary-light transition-colors">
+            <button onClick={() => scrollToSection('home')} className="flex items-center space-x-2 whitespace-nowrap hover:text-primary-light transition-colors">
               <Home className="h-4 w-4" />
               <span>Home</span>
-            </a>
-            <a href="#" className="whitespace-nowrap hover:text-primary-light transition-colors">
+            </button>
+            <button onClick={() => scrollToSection('products')} className="whitespace-nowrap hover:text-primary-light transition-colors">
               Products & Services
-            </a>
-            <a href="#" className="flex items-center space-x-2 whitespace-nowrap hover:text-primary-light transition-colors">
+            </button>
+            <button onClick={() => scrollToSection('debit-card')} className="flex items-center space-x-2 whitespace-nowrap hover:text-primary-light transition-colors">
               <CreditCard className="h-4 w-4" />
               <span>Manage Debit Card E-Mandate</span>
-            </a>
+            </button>
             
             {/* Help & Contact Dropdown */}
             <DropdownMenu>
@@ -212,8 +217,123 @@ export const SBIHomepage = ({ onLoginClick }: SBIHomepageProps) => {
         </div>
       </section>
 
+      {/* Products & Services Section */}
+      <section id="products" className="py-16 bg-muted/20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-foreground mb-12">
+            Our Products & Services
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="bg-primary/10 p-3 rounded-lg">
+                  <CreditCard className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-semibold text-lg">Savings Account</h3>
+              </div>
+              <p className="text-muted-foreground">Open a savings account with attractive interest rates and zero balance options.</p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="bg-primary/10 p-3 rounded-lg">
+                  <Home className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-semibold text-lg">Home Loans</h3>
+              </div>
+              <p className="text-muted-foreground">Competitive interest rates and flexible repayment options for your dream home.</p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="bg-primary/10 p-3 rounded-lg">
+                  <CreditCard className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-semibold text-lg">Credit Cards</h3>
+              </div>
+              <p className="text-muted-foreground">Discover a range of credit cards with exciting rewards and benefits.</p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="bg-primary/10 p-3 rounded-lg">
+                  <Shield className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-semibold text-lg">Insurance</h3>
+              </div>
+              <p className="text-muted-foreground">Comprehensive insurance solutions for life, health, and property.</p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="bg-primary/10 p-3 rounded-lg">
+                  <CheckCircle className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-semibold text-lg">Fixed Deposits</h3>
+              </div>
+              <p className="text-muted-foreground">Secure your future with guaranteed returns on fixed deposits.</p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="bg-primary/10 p-3 rounded-lg">
+                  <Globe className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-semibold text-lg">International Banking</h3>
+              </div>
+              <p className="text-muted-foreground">Seamless international transactions and forex services.</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Debit Card E-Mandate Section */}
+      <section id="debit-card" className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-foreground mb-8">
+            Manage Debit Card E-Mandate
+          </h2>
+          
+          <div className="max-w-3xl mx-auto">
+            <Card className="p-8">
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <CreditCard className="h-8 w-8 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">What is Debit Card E-Mandate?</h3>
+                    <p className="text-muted-foreground">
+                      E-Mandate is a facility that allows you to authorize recurring payments directly from your account using your debit card. This secure service eliminates the need for physical mandate forms.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <CheckCircle className="h-8 w-8 text-success flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Key Benefits</h3>
+                    <ul className="text-muted-foreground space-y-2">
+                      <li>→ Hassle-free recurring payments</li>
+                      <li>→ Secure and encrypted transactions</li>
+                      <li>→ Easy modification and cancellation</li>
+                      <li>→ Real-time updates and notifications</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <Button variant="banking" size="lg" className="w-full" onClick={onLoginClick}>
+                    Login to Manage E-Mandate
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Security Guidelines */}
-      <section className="py-12">
+      <section className="py-12 bg-muted/20">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold text-center text-foreground mb-8">
             FOR YOUR OWN SECURITY
